@@ -24,5 +24,6 @@ jobs:
           rm README.md
           cd ../
           cp -rf upstream/* .
+          add .
           git commit -m "generated"
           git push 
