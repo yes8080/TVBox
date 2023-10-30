@@ -1,0 +1,37 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      latest:
+        description: 'Indicator of whether or not is a prerelease'
+        required: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout upstream repo
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          submodules: "recursive"
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          cd upstream
+          sed -i "s/http:\/\/ftp6284928.host108.abeiyun.cn/https:\/\/tv.szlt.net/g" `grep -rl "http:\/\/ftp6284928.host108.abeiyun.cn" ./`
+          rm README.md
+          cp ../index.html .
+          
+      # 生成静态文件
+      - name: upload files to OSS
+        uses: fangbinwei/aliyun-oss-website-action@v1
+        with:
+          accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+          accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
+          bucket: 'tvres'
+          endpoint: 'oss-cn-shanghai.aliyuncs.com'
+          folder: 'upstream'
+          skipSetting: true
