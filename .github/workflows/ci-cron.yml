@@ -20,6 +20,7 @@ jobs:
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git submodule update --remote
           cd upstream
           sed -i "s/http:\/\/ftp6284928.host108.abeiyun.cn/https:\/\/cdn.jsdelivr.net\/gh\/yes8080\/TVBox@main/g" `grep -rl "http:\/\/ftp6284928.host108.abeiyun.cn" ./`
           rm README.md
