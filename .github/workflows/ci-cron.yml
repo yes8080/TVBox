@@ -22,7 +22,7 @@ jobs:
           git config user.email github-actions@github.com
           git submodule update --remote
           cd upstream
-          sed -i "s/http:\/\/ftp6284928.host108.abeiyun.cn/https:\/\/cdn.jsdelivr.net\/gh\/yes8080\/TVBox@main/g" `grep -rl "http:\/\/ftp6284928.host108.abeiyun.cn" ./`
+          sed -i "s/https:\/\/tv.5ye.cc/https:\/\/cdn.jsdelivr.net\/gh\/yes8080\/TVBox@main/g" `grep -rl "https:\/\/tv.5ye.cc" ./`
           rm README.md
           cd ../
           cp -rf upstream/* .
