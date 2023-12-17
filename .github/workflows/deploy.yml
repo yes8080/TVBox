@@ -21,7 +21,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           cd upstream
-          sed -i "s/http:\/\/ftp6284928.host108.abeiyun.cn/https:\/\/tv.szlt.net/g" `grep -rl "http:\/\/ftp6284928.host108.abeiyun.cn" ./`
+          sed -i "s/https:\/\/tv.5ye.cc/https:\/\/tv.szlt.net/g" `grep -rl "https:\/\/tv.5ye.cc" ./`
           rm README.md
           cp ../index.html .
           
